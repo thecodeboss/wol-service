@@ -1,10 +1,12 @@
-import express from 'express';
+import 'dotenv/config';
 import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
 import jwt from 'jsonwebtoken';
+import path from 'path';
 
-import { typeDefs } from './types';
 import { resolvers } from './resolvers';
 import { startDeviceDiscoveryScheduler } from './scheduler';
+import { typeDefs } from './types';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const app = express();
@@ -35,11 +37,17 @@ const server = new ApolloServer({
   context: ({ req }) => ({ user: (req as any).user }),
 });
 
-const PORT = process.env.PORT || 4000;
-
 (async () => {
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, path: '/graphql' });
+
+  app.use(express.static(path.join(__dirname, 'public')));
+
+  app.get('/', (_req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+
+  const PORT = process.env.PORT || 4000;
 
   app.listen(PORT, () => {
     console.log(`🌱 Bud is now sprouting on port ${PORT}`);
