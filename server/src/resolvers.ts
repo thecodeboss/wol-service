@@ -27,17 +27,17 @@ export const resolvers: IResolvers = {
       }
       throw new Error('Incorrect password.');
     },
-    awaken: async (_: unknown, { mac }: { mac: string }, { user }: any) => {
+    awaken: async (_: unknown, { macAddress }: { macAddress: string }, { user }: any) => {
       if (!user || !user.isAuthenticated) {
         throw new Error('Unauthorized');
       }
       try {
-        await awaken(mac);
-        console.log(`🌱 Bud sent a magic packet to device (${mac})`);
+        await awaken(macAddress);
+        console.log(`🌱 Bud sent a magic packet to device (${macAddress})`);
         return true;
       } catch (error) {
         const typedError = error as Error;
-        throw new Error(`Failed to awaken device (${mac}): ${typedError.message}`);
+        throw new Error(`Failed to awaken device (${macAddress}): ${typedError.message}`);
       }
     },
   },

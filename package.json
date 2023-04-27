@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "npm --prefix frontend run build",
-    "generate-env": "npm run --prefix server generate-env",
+    "configure": "npm run --prefix server configure",
     "dev": "concurrently \"npm --prefix server run dev\" \"npm --prefix frontend run dev\""
   },
   "keywords": [],

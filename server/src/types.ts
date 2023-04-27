@@ -7,11 +7,12 @@ export const typeDefs = gql`
 
   type Mutation {
     login(password: String!): String
-    awaken(mac: String!): Boolean
+    awaken(macAddress: String!): Boolean
   }
 
   type Device {
+    ipAddress: String
+    macAddress: String
     name: String
-    mac: String
   }
 `;

@@ -2,13 +2,14 @@
   "name": "wol-server",
   "private": true,
   "scripts": {
+    "configure": "ts-node ./scripts/configure.ts",
     "dev": "nodemon ./src/index.ts",
-    "generate-env": "ts-node ./scripts/generate-env.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "apollo-server-express": "^3.12.0",
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "graphql-tools": "^8.3.20",
